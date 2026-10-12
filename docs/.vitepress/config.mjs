@@ -21,5 +21,21 @@ export default defineConfig({
   author: '溪云',
   themeConfig: {
     outlineTitle: "目录", // ← 这一行！右侧大纲标题，替换 On this page
-  }
+  },
+  head: [
+    [
+      'script',
+      {},
+      `
+      (function(){
+        // 只取路径，例如 /my_site/xxx
+        const path = encodeURIComponent(location.pathname);
+        const statScript = document.createElement('script');
+        statScript.src = "http://158.51.126.229:8000/my_site/api/visit?page=" + path;
+        statScript.async = true;
+        document.head.appendChild(statScript);
+      })();
+      `
+    ]
+  ]
 })
